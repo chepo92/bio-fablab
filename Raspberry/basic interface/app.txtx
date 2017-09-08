@@ -1,0 +1,33 @@
+// Imports
+var express = require('express');
+var app = express();
+
+// node-aREST
+var piREST = require("pi-arest")(app);
+//piREST.addDevice('http','192.168.0.13');
+
+
+// View engine
+app.set('view engine', 'jade');
+
+// Set public folder
+app.use(express.static(__dirname + '/public'));
+
+//agregado 
+//piREST.set_id('raspian123');
+//piREST.set_name('pi_cloud');
+//piREST.set_mode('bcm');
+
+// Connect to cloud.aREST.io (agregado)
+//piREST.connect();
+
+
+// Interface routes
+app.get('/', function(req, res){
+  res.render('interface');
+});
+
+// Start server
+var server = app.listen(3000, function() {
+    console.log('Listening on port %d', server.address().port);
+});

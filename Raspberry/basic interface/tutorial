@@ -1,0 +1,9 @@
+https://learn.adafruit.com/node-embedded-development/installing-node-dot-js
+
+
+sudo npm install express jade
+sudo npm install --unsafe-perm serialport
+sudo npm install arest
+sudo node app.js
+
+source: https://openhomeautomation.net/connect-esp8266-raspberry-pi/
