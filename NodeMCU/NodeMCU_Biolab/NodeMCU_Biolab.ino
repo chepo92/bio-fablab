@@ -1,18 +1,15 @@
-/* SFE_BMP180 altitude example sketch
-
-This sketch shows how to use the Bosch BMP180 pressure sensor
-as an altimiter.
+/*   
+NODE MCU Web server with two Sensors over I2C and aREST API
+BMP180 altitude 
+ClosedCube_HDC1080 humidity 
 https://www.sparkfun.com/products/11824
-
 Like most pressure sensors, the BMP180 measures absolute pressure.
 Since absolute pressure varies with altitude, you can use the pressure
 to determine your altitude.
 
 Hardware connections:
-
 - (GND) to GND
 + (VDD) to 3.3V
-
 (WARNING: do not connect + to 5V or the sensor will be damaged!)
 
 You will also need to connect the I2C pins (SCL and SDA) to your
@@ -22,22 +19,12 @@ Any Arduino pins labeled:  SDA  SCL
 Uno, Redboard, Pro:        A4   A5
 Mega2560, Due:             20   21
 Leonardo:                   2    3
-NodeMCU (ESP12E ):         D2   D1
+NodeMCU V1(ESP12E ):       D2   D1
 
 Leave the IO (VDDIO) pin unconnected. This pin is for connecting
 the BMP180 to systems with lower logic levels such as 1.8V
 
-Have fun! -Your friends at SparkFun.
 
-The SFE_BMP180 library uses floating-point equations developed by the
-Weather Station Data Logger project: http://wmrx00.sourceforge.net/
-
-Our example code uses the "beerware" license. You can do anything
-you like with this code. No really, anything. If you find it useful,
-buy me a beer someday.
-
-V10 Mike Grusin, SparkFun Electronics 10/24/2013
-V1.1.2 Updates for Arduino 1.6.4 5/2015
 */
 
 // Your sketch must #include this library, and the Wire library.
@@ -49,8 +36,11 @@ V1.1.2 Updates for Arduino 1.6.4 5/2015
 #include <aREST.h>
 
 // WiFi parameters
-const char* ssid = "yourssid";
-const char* password = "yourpass";
+const char* ssid = "ARRIS-3F62";
+const char* password = "BP28CD304627";
+const char* id = "2";
+const char* Name = "sensor_module2";  
+
 
 // The port to listen for incoming TCP connections 
 #define LISTEN_PORT           80
@@ -60,7 +50,7 @@ WiFiServer server(LISTEN_PORT);
 
 // You will need to create an SFE_BMP180 object, here called "pressure":
 
-SFE_BMP180 pressure;
+SFE_BMP180 bmp180;
 ClosedCube_HDC1080 hdc1080;
 
 // Create aREST instance
@@ -73,7 +63,7 @@ double T;
 //Variables de control y tiempo
 int ledState = LOW;     
 unsigned long previousMillis = 0;
-const long interval = 1000;
+const long interval = 500;
 
 //variables Hdc1080
 double temp;
@@ -94,7 +84,7 @@ void setup()
   Serial.println("REBOOT");
 
   // Initialize the Pressure sensor (it is important to get calibration values stored on the device).
-  if (pressure.begin())
+  if (bmp180.begin())
     Serial.println("BMP180 init success");
   else
   {
@@ -118,14 +108,16 @@ void setup()
   Serial.println(hdc1080.readManufacturerId(), HEX); // 0x5449 ID of Texas Instruments
   Serial.print("Device ID=0x");
   Serial.println(hdc1080.readDeviceId(), HEX); // 0x1050 ID of the device
-  
+
+
+  //REST API
   // Init variables and expose them to REST API
   rest.variable("temperature",&temperature);
   rest.variable("humidity",&humidity);
     
   // Give name and ID to device
-  rest.set_id("1");
-  rest.set_name("sensor_module");
+  rest.set_id(id);
+  rest.set_name(Name);
 
   // Connect to WiFi
   WiFi.begin(ssid, password);
@@ -145,9 +137,11 @@ void setup()
   
 }
 
+
+
 void loop()
 {
-
+  //Blink Led to show it's working in the loop
   unsigned long currentMillis = millis();
   if(currentMillis - previousMillis >= interval) {
     previousMillis = currentMillis;   
@@ -158,39 +152,43 @@ void loop()
     digitalWrite(LED_BUILTIN, ledState);
  }
 
-  //Get Pressure    and temp
+// Data from bmp180:
+ //Get Pressure    and temp
   double a,P;
-  // Get a new pressure reading:
+  // Get a new pressure reading 
   P = getPressure();
   // Calc the relative altitude difference between
   // the new reading and the baseline reading:
-  a = pressure.altitude(P,baseline);
+  a = bmp180.altitude(P,baseline);
 
   //Print 
-  Serial.print("relative altitude: ");
-  if (a >= 0.0) Serial.print(" "); // add a space for positive numbers
-  Serial.print(a,1);
-  Serial.print(" meters, ");
-  if (a >= 0.0) Serial.print(" "); // add a space for positive numbers
-  Serial.print(a*3.28084,0);
-    Serial.print(" feet");
-    Serial.print(" Temp: ");
-    Serial.print(T);
-    Serial.println(" degree ");
+//  Serial.print("relative altitude: ");
+//  if (a >= 0.0) Serial.print(" "); // add a space for positive numbers
+//  Serial.print(a,1);
+//  Serial.print(" meters, ");
+//  if (a >= 0.0) Serial.print(" "); // add a space for positive numbers
+//  Serial.print(a*3.28084,0);
+//    Serial.print(" feet");
+//    Serial.print(" Temp: ");
+//    Serial.print(T);
+//    Serial.println(" degree ");
+
 
 // Get temp and humidity from 1080
   temp = hdc1080.readTemperature();
   rh = hdc1080.readHumidity();
 
-  Serial.print("T=");
-  Serial.print(temp);
-  Serial.print("C, RH=");
-  Serial.print(rh);
-  Serial.println("%");
+//Print
+//  Serial.print("T=");
+//  Serial.print(temp);
+//  Serial.print("C, RH=");
+//  Serial.print(rh);
+//  Serial.println("%");
+
 
  // Pass readings to API 
-  temperature = temp;
-  humidity = rh;
+  temperature =  temp;
+  humidity =  rh;
 
   
   // Handle REST calls
@@ -201,7 +199,7 @@ void loop()
   while(!client.available()){
     delay(1);
   }
-rest.handle(client);
+  rest.handle(client);
 
 
 
@@ -219,7 +217,7 @@ double getPressure()
   // If request is successful, the number of ms to wait is returned.
   // If request is unsuccessful, 0 is returned.
 
-  status = pressure.startTemperature();
+  status = bmp180.startTemperature();
   if (status != 0)
   {
     // Wait for the measurement to complete:
@@ -231,7 +229,7 @@ double getPressure()
     // Use '&T' to provide the address of T to the function.
     // Function returns 1 if successful, 0 if failure.
 
-    status = pressure.getTemperature(T);
+    status = bmp180.getTemperature(T);
     if (status != 0)
     {
       // Start a pressure measurement:
@@ -239,7 +237,7 @@ double getPressure()
       // If request is successful, the number of ms to wait is returned.
       // If request is unsuccessful, 0 is returned.
 
-      status = pressure.startPressure(3);
+      status = bmp180.startPressure(3);
       if (status != 0)
       {
         // Wait for the measurement to complete:
@@ -252,7 +250,7 @@ double getPressure()
         // (If temperature is stable, you can do one temperature measurement for a number of pressure measurements.)
         // Function returns 1 if successful, 0 if failure.
 
-        status = pressure.getPressure(P,T);
+        status = bmp180.getPressure(P,T);
         if (status != 0)
         {
           return(P);
