@@ -1,9 +1,15 @@
 https://learn.adafruit.com/node-embedded-development/installing-node-dot-js
 
+To install first time: 
 
 sudo npm install express jade
 sudo npm install --unsafe-perm serialport
 sudo npm install arest
+
+To run every time power on (or just execute run.sh): 
 sudo node app.js
+
+//Navigate to
+http://localhost:3000 or http://RPi-ip:3000
 
 source: https://openhomeautomation.net/connect-esp8266-raspberry-pi/
