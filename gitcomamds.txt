@@ -1,0 +1,11 @@
+git status
+
+
+git add --all
+git commit -am 'add json rules and python program'
+
+git push -u origin master
+
+git pull
+
+git remote add origin git@github.com:HarryPotter/snitch-sniffer.git
