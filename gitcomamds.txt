@@ -4,7 +4,7 @@ git status
 git add --all
 git commit -am 'add json rules and python program'
 
-git push -u origin master
+git push origin master
 
 git pull
 
