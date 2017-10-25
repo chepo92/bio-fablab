@@ -1,7 +1,7 @@
 /*   
 NODE MCU Web server with two Sensors over I2C and aREST API
-BMP180 altitude 
-ClosedCube_HDC1080 humidity 
+BMP180 altitude and temo
+ClosedCube_HDC1080 humidity and temp
 https://www.sparkfun.com/products/11824
 Like most pressure sensors, the BMP180 measures absolute pressure.
 Since absolute pressure varies with altitude, you can use the pressure
