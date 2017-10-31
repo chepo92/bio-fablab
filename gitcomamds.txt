@@ -1,11 +1,13 @@
+git init 
 git status
-
 
 git add --all
 git commit -am 'add json rules and python program'
 
 git push origin master
-
 git pull
 
-git remote add origin git@github.com:HarryPotter/snitch-sniffer.git
+git remote add origin git@github.com:chepo92/bio-fablab.git
+git remote remove origin
+
+git clone https://github.com/chepo92/bio-fablab.git
