@@ -1,7 +1,7 @@
 <?php
 $password= "1234";
  //Importamos la configuracion
- require("PWR_config.php");
+ require("config.php");
 if ($_GET['pass'] == $password)
  {
 if (mysqli_connect_errno())
