@@ -57,7 +57,7 @@ unsigned long previousBlink = 0;
 long blinkInterval = 500;
 
 unsigned long previousMillis = 0;
-long interval = 30*60*1000;   // cada 30 min en milisegundos 
+long interval = 2000;   //  30*60*1000 cada 30 min (en milisegundos )
 
 
 //variables Hdc1080
@@ -181,56 +181,7 @@ void loop()
   if(previousMillis==0 ||(currentMillis - previousMillis >= interval)) {
                    previousMillis = currentMillis;
                    
-                    Serial.print("Temperatura: ");
-                    Serial.print(temperature);
-                    Serial.print(" Humedad: ");
-                    Serial.print(humidity);
-                    Serial.println();
-                    Serial.print("connecting to ");
-                    Serial.println(host);
-                  
-                    // Use WiFiClient class to create TCP connections
-                    WiFiClient client;
-                    const int httpPort = 80;
-                    if (!client.connect(host, httpPort)) {
-                      Serial.println("connection failed");
-                      blinkInterval = 5000;
-                      return;
-                    }
-                    blinkInterval = 500;
-                    // We now create a URL for the request
-                    String url = "/dht11.php?";
-                    //String key = "?pass=1234";
-                    String dato1 = "&temp=";
-                    String dato2 = "&humedad=";
-                  
-                    Serial.print("Requesting URL: ");
-                    Serial.println(url);
-                  
-                    // This will send the request to the server
-                  //  client.print(String("GET ") + url + key + dato1 + temp + dato2 + hum + " HTTP/1.1\r\n" +
-                  //               "Host: " + host + "\r\n" +
-                  //               "Connection: close\r\n\r\n");
-                    client.print(String("GET ") + url + dato1 + temperature + dato2 + humidity + " HTTP/1.1\r\n" +
-                                 "Host: " + host + "\r\n" +
-                                 "Connection: close\r\n\r\n");
-                    unsigned long timeout = millis();                 
-                    while (client.available() == 0) {
-                      if (millis() - timeout > 5000) {
-                        Serial.println(">>> Client Timeout !");
-                        client.stop();
-                        return;
-                      }
-                    }
-                  
-                    // Read all the lines of the reply from server and print them to Serial
-                    while (client.available()) {
-                      String line = client.readStringUntil('\r');
-                      Serial.print(line);
-                    }
-                  
-                    Serial.println();
-                    Serial.println("closing connection");
+            upload();
       }
 
 
@@ -297,5 +248,56 @@ double getPressure()
   else Serial.println("error starting temperature measurement\n");
 }
 
-
+void upload(){
+                      Serial.print("Temperatura: ");
+                    Serial.print(temperature);
+                    Serial.print(" Humedad: ");
+                    Serial.print(humidity);
+                    Serial.println();
+                    Serial.print("connecting to ");
+                    Serial.println(host);
+                  
+                    // Use WiFiClient class to create TCP connections
+                    WiFiClient client;
+                    const int httpPort = 80;
+                    if (!client.connect(host, httpPort)) {
+                      Serial.println("connection failed");
+                      blinkInterval = 5000;
+                      return;
+                    }
+                    blinkInterval = 500;
+                    // We now create a URL for the request
+                    String url = "/dht11.php?";
+                    //String key = "?pass=1234";
+                    String dato1 = "&temp=";
+                    String dato2 = "&humedad=";
+                  
+                    Serial.print("Requesting URL: ");
+                    Serial.println(url);
+                  
+                    // This will send the request to the server
+                  //  client.print(String("GET ") + url + key + dato1 + temp + dato2 + hum + " HTTP/1.1\r\n" +
+                  //               "Host: " + host + "\r\n" +
+                  //               "Connection: close\r\n\r\n");
+                    client.print(String("GET ") + url + dato1 + temperature + dato2 + humidity + " HTTP/1.1\r\n" +
+                                 "Host: " + host + "\r\n" +
+                                 "Connection: close\r\n\r\n");
+                    unsigned long timeout = millis();                 
+                    while (client.available() == 0) {
+                      if (millis() - timeout > 5000) {
+                        Serial.println(">>> Client Timeout !");
+                        client.stop();
+                        return;
+                      }
+                    }
+                  
+                    // Read all the lines of the reply from server and print them to Serial
+                    while (client.available()) {
+                      String line = client.readStringUntil('\r');
+                      Serial.print(line);
+                    }
+                  
+                    Serial.println();
+                    Serial.println("closing connection");
+}
 
