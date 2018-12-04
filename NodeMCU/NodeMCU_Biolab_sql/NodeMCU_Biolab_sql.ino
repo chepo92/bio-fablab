@@ -57,7 +57,7 @@ unsigned long previousBlink = 0;
 long blinkInterval = 500;
 
 unsigned long previousMillis = 0;
-long interval = 2000;   //  30*60*1000 cada 30 min (en milisegundos )
+long interval = 5000;   //  30*60*1000 cada 30 min (en milisegundos )
 
 
 //variables Hdc1080
