@@ -71,6 +71,11 @@ double rh;
   double temperature;
  double  humidity ;
 
+
+// ID del ESP 
+String sensorID= String(ESP.getChipId()); 
+
+
 void setup()
 {
   //LED
@@ -123,6 +128,9 @@ void setup()
   Serial.println("WiFi connected");
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
+
+  Serial.print("EspID: "); 
+  Serial.println(sensorID); 
 
   
 }
@@ -249,7 +257,7 @@ double getPressure()
 }
 
 void upload(){
-                      Serial.print("Temperatura: ");
+                    Serial.print("Temperatura: ");
                     Serial.print(temperature);
                     Serial.print(" Humedad: ");
                     Serial.print(humidity);
