@@ -277,6 +277,7 @@ void upload(){
                     // We now create a URL for the request
                     String url = "/dht11.php";
                     String key = "?pass=1234";
+                    String sid = "&sid=";
                     String dato1 = "&temp=";
                     String dato2 = "&humedad=";
                   
