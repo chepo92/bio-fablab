@@ -1,0 +1,9 @@
+#!/bin/bash
+
+extension .sh
+
+make executable: 
+sudo chmod +x filemane.sh
+
+execute:
+sh filename.sh

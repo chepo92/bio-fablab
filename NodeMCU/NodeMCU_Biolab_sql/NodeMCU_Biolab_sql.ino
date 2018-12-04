@@ -57,7 +57,7 @@ unsigned long previousBlink = 0;
 long blinkInterval = 500;
 
 unsigned long previousMillis = 0;
-long interval = 30*60*1000;
+long interval = 30*60*1000;   // cada 30 min en milisegundos 
 
 
 //variables Hdc1080
@@ -178,7 +178,7 @@ void loop()
   humidity =  rh;
 
     //Subir los datos (temp hum)a la base 
-  if(currentMillis - previousMillis >= interval) {
+  if(previousMillis==0 ||(currentMillis - previousMillis >= interval)) {
                    previousMillis = currentMillis;
                    
                     Serial.print("Temperatura: ");
