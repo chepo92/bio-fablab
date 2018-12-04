@@ -275,8 +275,8 @@ void upload(){
                     }
                     blinkInterval = 500;
                     // We now create a URL for the request
-                    String url = "/dht11.php?";
-                    //String key = "?pass=1234";
+                    String url = "/dht11.php";
+                    String key = "?pass=1234";
                     String dato1 = "&temp=";
                     String dato2 = "&humedad=";
                   
@@ -287,7 +287,7 @@ void upload(){
                   //  client.print(String("GET ") + url + key + dato1 + temp + dato2 + hum + " HTTP/1.1\r\n" +
                   //               "Host: " + host + "\r\n" +
                   //               "Connection: close\r\n\r\n");
-                    client.print(String("GET ") + url + dato1 + temperature + dato2 + humidity + " HTTP/1.1\r\n" +
+                    client.print(String("GET ") + url + key + sid + sensorID + dato1 + temperature + dato2 + humidity + " HTTP/1.1\r\n" +
                                  "Host: " + host + "\r\n" +
                                  "Connection: close\r\n\r\n");
                     unsigned long timeout = millis();                 
