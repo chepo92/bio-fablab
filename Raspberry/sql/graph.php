@@ -75,10 +75,10 @@ $resultado=mysqli_query($con, $query);
   <!-- Second Photo Grid-->
   <div class="w3-row-padding w3-padding-16 w3-center">
     <div class="w3-half">
-	  <div id="graph1"></div>
+	  <div id="graph3"></div>
     </div>
     <div class="w3-half">
-	  <div id="graph2"></div>
+	  <div id="graph4"></div>
     </div>
 
   </div>
@@ -281,7 +281,7 @@ $(function () {
             name: 'Sensor 1',
             data: [<?php
                 $chipId = 270824;
-				$variable = var3;
+				$variable = temp;
                 $fecha = isset($_POST ['fecha']) ? $_POST ['fecha'] : date("Y-m-d");             
                 $ano = substr("$fecha", 0, 4); // 2017/07/16
                 $mes = substr("$fecha", 5, 2);
@@ -292,7 +292,7 @@ $(function () {
             name: 'Sensor 2',
             data: [<?php
                 $chipId = 270846;
-				$variable= var3;
+				$variable= temp;
                 $fecha = isset($_POST ['fecha']) ? $_POST ['fecha'] : date("Y-m-d");             
                 $ano = substr("$fecha", 0, 4); // 2017/07/16
                 $mes = substr("$fecha", 5, 2);
@@ -328,7 +328,7 @@ $(function () {
             name: 'Sensor 1',
             data: [<?php
                 $chipId = 270824;
-				$variable = var4;
+				$variable = humedad;
                 $fecha = isset($_POST ['fecha']) ? $_POST ['fecha'] : date("Y-m-d");             
                 $ano = substr("$fecha", 0, 4); // 2017/07/16
                 $mes = substr("$fecha", 5, 2);
@@ -339,7 +339,7 @@ $(function () {
             name: 'Sensor 2',
             data: [<?php
                 $chipId = 270846;
-				$variable= var4;
+				$variable= humedad;
                 $fecha = isset($_POST ['fecha']) ? $_POST ['fecha'] : date("Y-m-d");             
                 $ano = substr("$fecha", 0, 4); // 2017/07/16
                 $mes = substr("$fecha", 5, 2);
