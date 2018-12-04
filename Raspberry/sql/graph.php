@@ -26,7 +26,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
 
 function temperatura_diaria ($con,$chipId,$variable,$ano,$mes,$dia) {
 
-$query = "SELECT UNIX_TIMESTAMP(timestamp), $variable FROM valores WHERE year(`timestamp`) = '$ano' AND month(`timestamp`) = '$mes' AND day(`timestamp`) = '$dia' AND `sensor`= '$chipId'";
+$query = "SELECT UNIX_TIMESTAMP(tiempo), $variable FROM valores WHERE year(`tiempo`) = '$ano' AND month(`tiempo`) = '$mes' AND day(`tiempo`) = '$dia' AND `sensor`= '$chipId'";
 $resultado=mysqli_query($con, $query);
 
  while ($row=mysqli_fetch_array($resultado))
@@ -172,7 +172,7 @@ $(function () {
         },
         colors: ['#337ab7', '#cc3c1a'],
         title: {
-            text: 'Voltaje'
+            text: 'Temperatura'
         },
         xAxis: {
              type: 'datetime',         
@@ -219,7 +219,7 @@ $(function () {
         },
         colors: ['#337ab7', '#cc3c1a'],
         title: {
-            text: 'Corriente'
+            text: 'Humedad'
         },
         xAxis: {
              type: 'datetime',         
@@ -266,7 +266,7 @@ $(function () {
         },
         colors: ['#337ab7', '#cc3c1a'],
         title: {
-            text: 'Potencia'
+            text: 'Free'
         },
         xAxis: {
              type: 'datetime',         
@@ -313,7 +313,7 @@ $(function () {
         },
         colors: ['#337ab7', '#cc3c1a'],
         title: {
-            text: 'Energía'
+            text: 'Free'
         },
         xAxis: {
              type: 'datetime',         
