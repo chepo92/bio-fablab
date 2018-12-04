@@ -136,7 +136,7 @@ $resultado=mysqli_query($con, $query);
     <div class="w3-third w3-serif">
       <h3>Consultar Fecha</h3>
 	  
-	  <form action="index.php" method="POST">
+	  <form action="graph.php" method="POST">
 		<input type="date" name="fecha" ><br>
 		<br>
 		<input type="submit" name="Enviar" >
