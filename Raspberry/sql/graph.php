@@ -99,12 +99,12 @@ $resultado=mysqli_query($con, $query);
 
   <!-- About Section -->
   <div class="w3-container w3-padding-32 w3-center">  
-    <h3>About Smartgrids</h3><br>
+    <h3>About BioMateriales</h3><br>
     <img src="/w3images/chef.jpg" alt="Smartgrids" class="w3-image" style="display:block;margin:auto" width="800" height="533">
     <div class="w3-padding-32">
       <h4><b>I am all of me!</b></h4>
-      <h6><i>Monitoreo de energía</i></h6>
-      <p>Herramienta para el monitoreo de los consumos e inyecciones de energía </p>
+      <h6><i>Monitoreo de sistemas</i></h6>
+      <p>Herramienta para el monitoreo de los sistemas biologicos y criaderos </p>
     </div>
   </div>
   <hr>
@@ -113,7 +113,7 @@ $resultado=mysqli_query($con, $query);
   <footer class="w3-row-padding w3-padding-32">
     <div class="w3-third">
       <h3>CONTACTO</h3>
-      <p>info@smartgrids.cl</p>
+      <p>info@domain.cl</p>
       <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
     </div>
   
