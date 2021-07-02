@@ -63,28 +63,21 @@ Descripción larga
 
 
 ## Installation
-Requirements:
-- [Req 1](#) version 1.0
-- [Req 2](#) (tested with 2.0)
 
-##### Downloading and installing steps (pre-build files):
-* **[Download, fork](#)** the latest release.
-* **Open...** the following path: `\etc\theproject`
-* **Execute, Launch** in the _console_ the following command: `install.sh`
+### Requirements
+      
+##### Downloading and installing, ESP8266 nodes:
+To configure and compile code for nodes, you need to have:
+Either:      
+  - [Arduino IDE](#) with ESP8266 board support installed
+  - [VSCode & PlatformIO](#) with ESP8266 board support
+      
+##### Downloading and installing, Raspberry Pi server:
+To install raspberry pi as central server and dashboard, you need to have:
+- [LAMP](https://projects.raspberrypi.org/en/projects/lamp-web-server-with-wordpress) Linux, Apache, MySQL, PHP
+- [Grafana](#)
 
-##### Downloading, building from source and installing steps:
-To build theProject, you need to have:
-- [Req 1](#) version 1.0
-- [Req 2](#) (tested with 2.0)
 
-Steps: 
-* **[Download, fork](#)** the latest version from `main` branch.
-* **Open...** the following path: `\etc\theproject`
-* **Execute, Launch** in the _console_ the following commands:
-```
-mkdir build
-cd build && make
-```
 
 ## Usage
 
@@ -118,9 +111,7 @@ Do you **need some help**? Check the _articles_ from the [wiki](#).
 ### Need more support?
 Reach out to us at one of the following places:
 
-- Website at [osuc](https://osuc.dev)
-- Discord [OSUC](#)
-- E-Mail: **contacto@osuc.dev**
+- 
 
 ## Credits
 
