@@ -71,11 +71,14 @@ To configure and compile code for nodes, you need to have:
 Either:      
   - [Arduino IDE](#) with ESP8266 board support installed
   - [VSCode & PlatformIO](#) with ESP8266 board support
-      
+
+- [ESP Home](https://esphome.io/guides/getting_started_command_line.html ) 
+           
 ##### Downloading and installing, Raspberry Pi server:
 To install raspberry pi as central server and dashboard, you need to have:
 - [LAMP](https://projects.raspberrypi.org/en/projects/lamp-web-server-with-wordpress) Linux, Apache, MySQL, PHP
 - [Grafana](#)
+- [HASS](https://www.home-assistant.io/installation/raspberrypi)
 
 
 
